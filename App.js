@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import AddCardScreen from './screens/AddCardScreen';
 import CardDetailScreen from './screens/CardDetailScreen';
@@ -9,13 +10,16 @@ import ScannerScreen from './screens/ScannerScreen';
 import FullscreenCodeScreen from './screens/FullscreenCodeScreen';
 
 export default function App() {
-  const [screen, setScreen] = useState('home');
+  const [currentScreen] = useState('login');
 
-  switch (screen) {
-    case 'add':
+  switch (currentScreen) {
+    case 'home':
+      return <HomeScreen />;
+
+    case 'addCard':
       return <AddCardScreen />;
 
-    case 'detail':
+    case 'cardDetail':
       return <CardDetailScreen />;
 
     case 'vault':
@@ -31,6 +35,6 @@ export default function App() {
       return <FullscreenCodeScreen />;
 
     default:
-      return <HomeScreen />;
+      return <LoginScreen />;
   }
 }
