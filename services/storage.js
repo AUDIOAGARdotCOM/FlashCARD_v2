@@ -1,18 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const STORAGE_KEY = '@flashcard_cards';
+const CARDS_STORAGE_KEY = '@flashcard_cards';
+const VAULT_STORAGE_KEY = '@flashcard_vault';
 
-export async function getCards() {
+export async function loadCards() {
   try {
-    const data = await AsyncStorage.getItem(STORAGE_KEY);
+    const data = await AsyncStorage.getItem(
+      CARDS_STORAGE_KEY
+    );
 
-    if (!data) {
-      return [];
-    }
-
-    return JSON.parse(data);
+    return data ? JSON.parse(data) : [];
   } catch (error) {
-    console.error('Errore lettura carte:', error);
+    console.error(error);
     return [];
   }
 }
@@ -20,64 +19,57 @@ export async function getCards() {
 export async function saveCards(cards) {
   try {
     await AsyncStorage.setItem(
-      STORAGE_KEY,
+      CARDS_STORAGE_KEY,
       JSON.stringify(cards)
     );
 
     return true;
   } catch (error) {
-    console.error('Errore salvataggio carte:', error);
+    console.error(error);
     return false;
   }
 }
 
-export async function addCard(card) {
+export async function loadVault() {
   try {
-    const cards = await getCards();
+    const data = await AsyncStorage.getItem(
+      VAULT_STORAGE_KEY
+    );
 
-    cards.push(card);
-
-    await saveCards(cards);
-
-    return cards;
+    return data ? JSON.parse(data) : [];
   } catch (error) {
-    console.error('Errore aggiunta carta:', error);
+    console.error(error);
     return [];
   }
 }
 
-export async function deleteCard(cardId) {
+export async function saveVault(items) {
   try {
-    const cards = await getCards();
-
-    const updatedCards = cards.filter(
-      card => card.id !== cardId
+    await AsyncStorage.setItem(
+      VAULT_STORAGE_KEY,
+      JSON.stringify(items)
     );
 
-    await saveCards(updatedCards);
-
-    return updatedCards;
+    return true;
   } catch (error) {
-    console.error('Errore eliminazione carta:', error);
-    return [];
+    console.error(error);
+    return false;
   }
 }
 
-export async function updateCard(updatedCard) {
+export async function clearAllData() {
   try {
-    const cards = await getCards();
-
-    const updatedCards = cards.map(card =>
-      card.id === updatedCard.id
-        ? updatedCard
-        : card
+    await AsyncStorage.removeItem(
+      CARDS_STORAGE_KEY
     );
 
-    await saveCards(updatedCards);
+    await AsyncStorage.removeItem(
+      VAULT_STORAGE_KEY
+    );
 
-    return updatedCards;
+    return true;
   } catch (error) {
-    console.error('Errore aggiornamento carta:', error);
-    return [];
+    console.error(error);
+    return false;
   }
 }
