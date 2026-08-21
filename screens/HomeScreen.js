@@ -1,30 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   Text,
   StyleSheet,
   Pressable,
-  View
+  View,
+  FlatList
 } from 'react-native';
 
 import SearchBar from '../components/SearchBar';
 import CardItem from '../components/CardItem';
+import EmptyState from '../components/EmptyState';
+import { getCards } from '../services/storage';
 
 export default function HomeScreen() {
   const [search, setSearch] = useState('');
+  const [cards, setCards] = useState([]);
 
-  const cards = [
-    {
-      id: 1,
-      name: 'Supermercato',
-      category: 'Spesa'
-    },
-    {
-      id: 2,
-      name: 'Farmacia',
-      category: 'Salute'
-    }
-  ];
+  useEffect(() => {
+    loadCards();
+  }, []);
+
+  async function loadCards() {
+    const savedCards = await getCards();
+    setCards(savedCards);
+  }
+
+  const filteredCards = cards.filter(card =>
+    card.name.toLowerCase().includes(
+      search.toLowerCase()
+    )
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,20 +44,21 @@ export default function HomeScreen() {
         placeholder="Cerca una carta..."
       />
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>
-          Più utilizzate
-        </Text>
-
-        {cards.map(card => (
-          <CardItem
-            key={card.id}
-            name={card.name}
-            category={card.category}
-            onPress={() => {}}
-          />
-        ))}
-      </View>
+      {filteredCards.length === 0 ? (
+        <EmptyState />
+      ) : (
+        <FlatList
+          data={filteredCards}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <CardItem
+              name={item.name}
+              category={item.category}
+              onPress={() => {}}
+            />
+          )}
+        />
+      )}
 
       <Pressable style={styles.addButton}>
         <Text style={styles.addButtonText}>
@@ -74,17 +81,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#197A55',
     marginBottom: 20
-  },
-
-  section: {
-    flex: 1,
-    marginTop: 10
-  },
-
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 12
   },
 
   addButton: {
