@@ -5,89 +5,102 @@ import {
   StyleSheet,
   TextInput,
   Pressable,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 export default function AddCardScreen() {
-  const [name, setName] = useState('');
-  const [code, setCode] = useState('');
+  const [cardName, setCardName] = useState('');
+  const [cardCode, setCardCode] = useState('');
   const [category, setCategory] = useState('Supermercato');
+
+  const categories = [
+    'Supermercato',
+    'Abbigliamento',
+    'Farmacia',
+    'Carburante',
+    'Altro'
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>
-        Nuova Carta
-      </Text>
-
-      <Text style={styles.label}>
-        Nome negozio
-      </Text>
-
-      <TextInput
-        style={styles.input}
-        value={name}
-        onChangeText={setName}
-        placeholder="Es. Carrefour"
-      />
-
-      <Text style={styles.label}>
-        Codice Barcode / QR
-      </Text>
-
-      <TextInput
-        style={styles.input}
-        value={code}
-        onChangeText={setCode}
-        placeholder="Inserisci il codice"
-      />
-
-      <Text style={styles.label}>
-        Categoria
-      </Text>
-
-      <View style={styles.categories}>
-        <Pressable
-          style={[
-            styles.category,
-            category === 'Supermercato' && styles.activeCategory
-          ]}
-          onPress={() => setCategory('Supermercato')}
-        >
-          <Text>Supermercato</Text>
-        </Pressable>
-
-        <Pressable
-          style={[
-            styles.category,
-            category === 'Farmacia' && styles.activeCategory
-          ]}
-          onPress={() => setCategory('Farmacia')}
-        >
-          <Text>Farmacia</Text>
-        </Pressable>
-
-        <Pressable
-          style={[
-            styles.category,
-            category === 'Altro' && styles.activeCategory
-          ]}
-          onPress={() => setCategory('Altro')}
-        >
-          <Text>Altro</Text>
-        </Pressable>
-      </View>
-
-      <Pressable style={styles.scanButton}>
-        <Text style={styles.scanText}>
-          Scansiona Barcode o QR
+      <ScrollView>
+        <Text style={styles.title}>
+          Nuova Carta
         </Text>
-      </Pressable>
 
-      <Pressable style={styles.saveButton}>
-        <Text style={styles.saveText}>
-          Salva Carta
+        <Text style={styles.label}>
+          Nome Carta
         </Text>
-      </Pressable>
+
+        <TextInput
+          style={styles.input}
+          value={cardName}
+          onChangeText={setCardName}
+          placeholder="Es. Carrefour"
+        />
+
+        <Text style={styles.label}>
+          Codice Carta
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          value={cardCode}
+          onChangeText={setCardCode}
+          placeholder="Barcode o QR Code"
+        />
+
+        <Text style={styles.label}>
+          Categoria
+        </Text>
+
+        <View style={styles.categories}>
+          {categories.map(item => (
+            <Pressable
+              key={item}
+              style={[
+                styles.categoryButton,
+                category === item && styles.categoryButtonActive
+              ]}
+              onPress={() => setCategory(item)}
+            >
+              <Text
+                style={[
+                  styles.categoryText,
+                  category === item && styles.categoryTextActive
+                ]}
+              >
+                {item}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+
+        <Pressable style={styles.actionButton}>
+          <Text style={styles.actionButtonText}>
+            Scansiona Barcode
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.actionButton}>
+          <Text style={styles.actionButtonText}>
+            Scansiona QR Code
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.actionButton}>
+          <Text style={styles.actionButtonText}>
+            Scatta Foto Carta
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.saveButton}>
+          <Text style={styles.saveButtonText}>
+            Salva Carta
+          </Text>
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -95,8 +108,8 @@ export default function AddCardScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#F8FBF9'
+    backgroundColor: '#F8FBF9',
+    padding: 20
   },
 
   title: {
@@ -106,60 +119,49 @@ const styles = StyleSheet.create({
   },
 
   label: {
-    marginTop: 15,
-    marginBottom: 5,
-    fontWeight: '600'
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 6,
+    marginTop: 15
   },
 
   input: {
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: '#D7E2DC',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
+    borderRadius: 12,
     padding: 12
   },
 
   categories: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: 10
   },
 
-  category: {
+  categoryButton: {
     borderWidth: 1,
     borderColor: '#D7E2DC',
-    borderRadius: 10,
-    padding: 10,
-    marginRight: 10,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginRight: 8,
+    marginBottom: 8
   },
 
-  activeCategory: {
-    backgroundColor: '#DDF0E8'
-  },
-
-  scanButton: {
-    marginTop: 25,
+  categoryButtonActive: {
     backgroundColor: '#197A55',
-    padding: 14,
-    borderRadius: 10,
-    alignItems: 'center'
+    borderColor: '#197A55'
   },
 
-  scanText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold'
+  categoryText: {
+    color: '#333333'
   },
 
-  saveButton: {
-    marginTop: 15,
-    backgroundColor: '#0F5C3F',
-    padding: 14,
-    borderRadius: 10,
-    alignItems: 'center'
+  categoryTextActive: {
+    color: '#FFFFFF'
   },
 
-  saveText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold'
-  }
-});
+  actionButton: {
+    backgroundColor: '#197A55',
