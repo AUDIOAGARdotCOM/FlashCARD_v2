@@ -11,7 +11,9 @@ export default function FullscreenCodeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Pressable style={styles.closeButton}>
-        <Text style={styles.closeText}>Chiudi</Text>
+        <Text style={styles.closeButtonText}>
+          Chiudi
+        </Text>
       </Pressable>
 
       <Text style={styles.title}>
@@ -19,9 +21,9 @@ export default function FullscreenCodeScreen() {
       </Text>
 
       <View style={styles.codeContainer}>
-        <View style={styles.barcodePlaceholder}>
-          <Text style={styles.barcodeText}>
-            ||||| || ||||| |||| |||
+        <View style={styles.barcodeArea}>
+          <Text style={styles.barcode}>
+            ||||| || ||||| ||||| |||||
           </Text>
         </View>
 
@@ -52,32 +54,32 @@ const styles = StyleSheet.create({
     right: 20
   },
 
-  closeText: {
+  closeButtonText: {
     color: '#FFFFFF',
     fontSize: 16
   },
 
   title: {
-    color: '#FFFFFF',
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
+    color: '#FFFFFF',
     marginBottom: 30
   },
 
   codeContainer: {
     width: '100%',
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    borderRadius: 16,
     padding: 30,
     alignItems: 'center'
   },
 
-  barcodePlaceholder: {
+  barcodeArea: {
     marginBottom: 20
   },
 
-  barcodeText: {
-    fontSize: 24,
+  barcode: {
+    fontSize: 28,
     fontWeight: 'bold',
     letterSpacing: 2
   },
@@ -93,4 +95,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
-
