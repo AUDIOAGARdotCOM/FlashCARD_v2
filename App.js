@@ -10,31 +10,58 @@ import ScannerScreen from './screens/ScannerScreen';
 import FullscreenCodeScreen from './screens/FullscreenCodeScreen';
 
 export default function App() {
-  const [currentScreen] = useState('login');
+  const [currentScreen, setCurrentScreen] =
+    useState('login');
+
+  const navigation = {
+    goToLogin: () => setCurrentScreen('login'),
+    goToHome: () => setCurrentScreen('home'),
+    goToAddCard: () => setCurrentScreen('addCard'),
+    goToCardDetail: () =>
+      setCurrentScreen('cardDetail'),
+    goToVault: () => setCurrentScreen('vault'),
+    goToSettings: () =>
+      setCurrentScreen('settings'),
+    goToScanner: () => setCurrentScreen('scanner'),
+    goToFullscreen: () =>
+      setCurrentScreen('fullscreen')
+  };
 
   switch (currentScreen) {
     case 'home':
-      return <HomeScreen />;
+      return <HomeScreen navigation={navigation} />;
 
     case 'addCard':
-      return <AddCardScreen />;
+      return <AddCardScreen navigation={navigation} />;
 
     case 'cardDetail':
-      return <CardDetailScreen />;
+      return (
+        <CardDetailScreen navigation={navigation} />
+      );
 
     case 'vault':
-      return <VaultScreen />;
+      return <VaultScreen navigation={navigation} />;
 
     case 'settings':
-      return <SettingsScreen />;
+      return (
+        <SettingsScreen navigation={navigation} />
+      );
 
     case 'scanner':
-      return <ScannerScreen />;
+      return (
+        <ScannerScreen navigation={navigation} />
+      );
 
     case 'fullscreen':
-      return <FullscreenCodeScreen />;
+      return (
+        <FullscreenCodeScreen
+          navigation={navigation}
+        />
+      );
 
     default:
-      return <LoginScreen />;
+      return (
+        <LoginScreen navigation={navigation} />
+      );
   }
 }
