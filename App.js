@@ -1,1 +1,5 @@
-console.log("TEST");
+import React from 'react';
+
+export default function App() {
+  return null;
+}
