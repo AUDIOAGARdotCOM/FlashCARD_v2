@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   Text,
   StyleSheet,
+  View,
   Pressable
 } from 'react-native';
 
@@ -13,25 +14,47 @@ export default function CardDetailScreen() {
         Dettaglio Carta
       </Text>
 
-      <Text style={styles.label}>
-        Nome carta
-      </Text>
+      <View style={styles.card}>
+        <Text style={styles.label}>
+          Nome Carta
+        </Text>
 
-      <Text style={styles.value}>
-        Esselunga
-      </Text>
+        <Text style={styles.value}>
+          Carrefour
+        </Text>
 
-      <Text style={styles.label}>
-        Categoria
-      </Text>
+        <Text style={styles.label}>
+          Categoria
+        </Text>
 
-      <Text style={styles.value}>
-        Supermercato
-      </Text>
+        <Text style={styles.value}>
+          Supermercato
+        </Text>
 
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>
-          Mostra in cassa
+        <Text style={styles.label}>
+          Codice
+        </Text>
+
+        <Text style={styles.code}>
+          1234567890123
+        </Text>
+      </View>
+
+      <Pressable style={styles.primaryButton}>
+        <Text style={styles.primaryButtonText}>
+          Mostra in Cassa
+        </Text>
+      </Pressable>
+
+      <Pressable style={styles.secondaryButton}>
+        <Text style={styles.secondaryButtonText}>
+          Modifica Carta
+        </Text>
+      </Pressable>
+
+      <Pressable style={styles.deleteButton}>
+        <Text style={styles.deleteButtonText}>
+          Elimina Carta
         </Text>
       </Pressable>
     </SafeAreaView>
@@ -41,35 +64,78 @@ export default function CardDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F8FBF9',
     padding: 20
   },
 
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 30
+    marginBottom: 20
+  },
+
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 20,
+    marginBottom: 20
   },
 
   label: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#666666',
     marginTop: 10
   },
 
   value: {
     fontSize: 18,
-    fontWeight: '600'
+    fontWeight: '600',
+    marginTop: 4
   },
 
-  button: {
-    marginTop: 40,
+  code: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 4,
+    letterSpacing: 2
+  },
+
+  primaryButton: {
     backgroundColor: '#197A55',
-    paddingVertical: 14,
     borderRadius: 12,
+    padding: 15,
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  primaryButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold'
+  },
+
+  secondaryButton: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#197A55',
+    borderRadius: 12,
+    padding: 15,
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  secondaryButtonText: {
+    color: '#197A55',
+    fontWeight: 'bold'
+  },
+
+  deleteButton: {
+    backgroundColor: '#D32F2F',
+    borderRadius: 12,
+    padding: 15,
     alignItems: 'center'
   },
 
-  buttonText: {
+  deleteButtonText: {
     color: '#FFFFFF',
     fontWeight: 'bold'
   }
