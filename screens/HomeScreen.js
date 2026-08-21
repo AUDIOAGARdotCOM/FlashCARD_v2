@@ -1,40 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
   StyleSheet,
-  TextInput,
   Pressable,
   View
 } from 'react-native';
 
+import SearchBar from '../components/SearchBar';
+import CardItem from '../components/CardItem';
+
 export default function HomeScreen() {
+  const [search, setSearch] = useState('');
+
+  const cards = [
+    {
+      id: 1,
+      name: 'Supermercato',
+      category: 'Spesa'
+    },
+    {
+      id: 2,
+      name: 'Farmacia',
+      category: 'Salute'
+    }
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.logo}>
         FlashCARD
       </Text>
 
-      <TextInput
-        style={styles.search}
+      <SearchBar
+        value={search}
+        onChangeText={setSearch}
         placeholder="Cerca una carta..."
       />
 
-      <View style={styles.emptyState}>
-        <Text style={styles.title}>
-          Non hai ancora carte fedeltà salvate
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>
+          Più utilizzate
         </Text>
 
-        <Text style={styles.subtitle}>
-          Scansiona la tua prima carta per iniziare
-        </Text>
-
-        <Pressable style={styles.button}>
-          <Text style={styles.buttonText}>
-            Scansiona una carta
-          </Text>
-        </Pressable>
+        {cards.map(card => (
+          <CardItem
+            key={card.id}
+            name={card.name}
+            category={card.category}
+            onPress={() => {}}
+          />
+        ))}
       </View>
+
+      <Pressable style={styles.addButton}>
+        <Text style={styles.addButtonText}>
+          Scansiona una carta
+        </Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -50,46 +73,30 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     color: '#197A55',
-    marginTop: 20,
     marginBottom: 20
   },
 
-  search: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#D7E2DC',
-    borderRadius: 12,
-    padding: 12
+  section: {
+    flex: 1,
+    marginTop: 10
   },
 
-  emptyState: {
-    flex: 1,
-    justifyContent: 'center',
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 12
+  },
+
+  addButton: {
+    backgroundColor: '#197A55',
+    borderRadius: 12,
+    padding: 15,
     alignItems: 'center'
   },
 
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-
-  subtitle: {
-    marginTop: 10,
-    textAlign: 'center',
-    color: '#666666'
-  },
-
-  button: {
-    marginTop: 25,
-    backgroundColor: '#197A55',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 10
-  },
-
-  buttonText: {
+  addButtonText: {
     color: '#FFFFFF',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 16
   }
 });
