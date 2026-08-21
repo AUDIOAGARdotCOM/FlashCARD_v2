@@ -1,43 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
   StyleSheet,
-  Pressable
+  Pressable,
+  Switch,
+  ScrollView
 } from 'react-native';
 
 export default function SettingsScreen() {
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>
-        Impostazioni
-      </Text>
-
-      <Pressable style={styles.item}>
-        <Text>Modalità Scura</Text>
-      </Pressable>
-
-      <Pressable style={styles.item}>
-        <Text>Dimensione Testo</Text>
-      </Pressable>
-
-      <Pressable style={styles.item}>
-        <Text>Backup</Text>
-      </Pressable>
-
-      <Pressable style={styles.item}>
-        <Text>Ripristino Backup</Text>
-      </Pressable>
-
-      <Pressable style={styles.item}>
-        <Text>Cambia PIN</Text>
-      </Pressable>
-
-      <Pressable style={styles.danger}>
-        <Text style={styles.dangerText}>
-          Cancella tutti i dati
+      <ScrollView>
+        <Text style={styles.title}>
+          Impostazioni
         </Text>
-      </Pressable>
+
+        <Pressable style={styles.item}>
+          <Text style={styles.itemText}>
+            Sincronizza ora
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.item}>
+          <Text style={styles.itemText}>
+            Backup Google Drive
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.item}>
+          <Text style={styles.itemText}>
+            Ripristina Backup
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.item}>
+          <Text style={styles.itemText}>
+            Cambia PIN
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.item}>
+          <Text style={styles.itemText}>
+            Dimensione Testo
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.switchRow}>
+          <Text style={styles.itemText}>
+            Modalità Scura
+          </Text>
+
+          <Switch
+            value={darkMode}
+            onValueChange={setDarkMode}
+          />
+        </Pressable>
+
+        <Text style={styles.sectionTitle}>
+          Zona Pericolosa
+        </Text>
+
+        <Pressable style={styles.deleteButton}>
+          <Text style={styles.deleteButtonText}>
+            Cancella tutti i dati
+          </Text>
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -45,6 +76,7 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F8FBF9',
     padding: 20
   },
 
@@ -55,23 +87,15 @@ const styles = StyleSheet.create({
   },
 
   item: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
     padding: 16,
-    borderWidth: 1,
-    borderColor: '#DDDDDD',
-    borderRadius: 10,
     marginBottom: 10
   },
 
-  danger: {
-    marginTop: 20,
-    padding: 16,
-    backgroundColor: '#D32F2F',
-    borderRadius: 10
+  itemText: {
+    fontSize: 16
   },
 
-  dangerText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  }
-});
+  switchRow: {
+    backgroundColor:
