@@ -3,29 +3,60 @@ import {
   SafeAreaView,
   Text,
   StyleSheet,
+  View,
   Pressable
 } from 'react-native';
 
-export default function VaultScreen() {
+export default function CardDetailScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
-        Cassaforte
+        Dettaglio Carta
       </Text>
 
-      <Text style={styles.description}>
-        Proteggi documenti personali, tessere e coupon.
-      </Text>
+      <View style={styles.card}>
+        <Text style={styles.label}>
+          Nome Carta
+        </Text>
 
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>
-          Sblocca Cassaforte
+        <Text style={styles.value}>
+          Carrefour
+        </Text>
+
+        <Text style={styles.label}>
+          Categoria
+        </Text>
+
+        <Text style={styles.value}>
+          Supermercato
+        </Text>
+
+        <Text style={styles.label}>
+          Codice
+        </Text>
+
+        <Text style={styles.code}>
+          1234567890123
+        </Text>
+      </View>
+
+      <Pressable style={styles.primaryButton}>
+        <Text style={styles.primaryButtonText}>
+          Mostra in Cassa
         </Text>
       </Pressable>
 
-      <Text style={styles.info}>
-        Nessun documento disponibile.
-      </Text>
+      <Pressable style={styles.secondaryButton}>
+        <Text style={styles.secondaryButtonText}>
+          Modifica Carta
+        </Text>
+      </Pressable>
+
+      <Pressable style={styles.deleteButton}>
+        <Text style={styles.deleteButtonText}>
+          Elimina Carta
+        </Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -33,38 +64,79 @@ export default function VaultScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#F8FBF9'
+    backgroundColor: '#F8FBF9',
+    padding: 20
   },
 
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#17392D'
+    marginBottom: 20
   },
 
-  description: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#666666'
-  },
-
-  button: {
-    marginTop: 30,
-    backgroundColor: '#197A55',
-    paddingVertical: 14,
+  card: {
+    backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    alignItems: 'center'
+    padding: 20,
+    marginBottom: 20
   },
 
-  buttonText: {
+  label: {
+    fontSize: 13,
+    color: '#666666',
+    marginTop: 10
+  },
+
+  value: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginTop: 4
+  },
+
+  code: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 4,
+    letterSpacing: 2
+  },
+
+  primaryButton: {
+    backgroundColor: '#197A55',
+    borderRadius: 12,
+    padding: 15,
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  primaryButtonText: {
     color: '#FFFFFF',
     fontWeight: 'bold'
   },
 
-  info: {
-    marginTop: 30,
-    textAlign: 'center',
-    color: '#666666'
+  secondaryButton: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#197A55',
+    borderRadius: 12,
+    padding: 15,
+    alignItems: 'center',
+    marginBottom: 10
+  },
+
+  secondaryButtonText: {
+    color: '#197A55',
+    fontWeight: 'bold'
+  },
+
+  deleteButton: {
+    backgroundColor: '#D32F2F',
+    borderRadius: 12,
+    padding: 15,
+    alignItems: 'center'
+  },
+
+  deleteButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold'
   }
 });
