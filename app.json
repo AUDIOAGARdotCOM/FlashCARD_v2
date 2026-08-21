@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "FlashCARD",
+    "slug": "flashcard",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "flashcard",
+    "android": {
+      "package": "com.flashcard.personal",
+      "permissions": [
+        "CAMERA",
+        "USE_BIOMETRIC"
+      ]
+    }
+  }
+}
