@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   Text,
   StyleSheet,
+  View,
   Pressable
 } from 'react-native';
 
@@ -13,13 +14,19 @@ export default function ScannerScreen() {
         Scanner
       </Text>
 
-      <Text style={styles.description}>
-        Inquadra un Barcode o un QR Code.
+      <Text style={styles.subtitle}>
+        Inquadra un codice a barre oppure un QR Code
       </Text>
+
+      <View style={styles.scanArea}>
+        <Text style={styles.scanText}>
+          Area di scansione
+        </Text>
+      </View>
 
       <Pressable style={styles.button}>
         <Text style={styles.buttonText}>
-          Avvia Scanner
+          Avvia fotocamera
         </Text>
       </Pressable>
     </SafeAreaView>
@@ -29,28 +36,42 @@ export default function ScannerScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    justifyContent: 'center'
+    backgroundColor: '#F8FBF9',
+    padding: 20
   },
 
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center'
+    marginBottom: 10
   },
 
-  description: {
-    marginTop: 15,
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#666666'
+  subtitle: {
+    color: '#666666',
+    marginBottom: 30
+  },
+
+  scanArea: {
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#197A55',
+    borderStyle: 'dashed',
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 300
+  },
+
+  scanText: {
+    color: '#197A55',
+    fontWeight: '600'
   },
 
   button: {
-    marginTop: 30,
+    marginTop: 20,
     backgroundColor: '#197A55',
-    paddingVertical: 14,
-    borderRadius: 12,
+    padding: 14,
+    borderRadius: 10,
     alignItems: 'center'
   },
 
