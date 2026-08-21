@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 export default function ScannerScreen() {
+  const [scanType, setScanType] = useState('barcode');
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
@@ -15,18 +17,54 @@ export default function ScannerScreen() {
       </Text>
 
       <Text style={styles.subtitle}>
-        Inquadra un codice a barre oppure un QR Code
+        Inquadra un Barcode oppure un QR Code
       </Text>
 
-      <View style={styles.scanArea}>
-        <Text style={styles.scanText}>
-          Area di scansione
+      <View style={styles.selector}>
+        <Pressable
+          style={[
+            styles.selectorButton,
+            scanType === 'barcode' && styles.selectedButton
+          ]}
+          onPress={() => setScanType('barcode')}
+        >
+          <Text
+            style={[
+              styles.selectorText,
+              scanType === 'barcode' && styles.selectedText
+            ]}
+          >
+            Barcode
+          </Text>
+        </Pressable>
+
+        <Pressable
+          style={[
+            styles.selectorButton,
+            scanType === 'qr' && styles.selectedButton
+          ]}
+          onPress={() => setScanType('qr')}
+        >
+          <Text
+            style={[
+              styles.selectorText,
+              scanType === 'qr' && styles.selectedText
+            ]}
+          >
+            QR Code
+          </Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.cameraArea}>
+        <Text style={styles.cameraText}>
+          Area Fotocamera
         </Text>
       </View>
 
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>
-          Avvia fotocamera
+      <Pressable style={styles.scanButton}>
+        <Text style={styles.scanButtonText}>
+          Avvia Scanner
         </Text>
       </Pressable>
     </SafeAreaView>
@@ -48,10 +86,37 @@ const styles = StyleSheet.create({
 
   subtitle: {
     color: '#666666',
-    marginBottom: 30
+    marginBottom: 20
   },
 
-  scanArea: {
+  selector: {
+    flexDirection: 'row',
+    marginBottom: 20
+  },
+
+  selectorButton: {
+    flex: 1,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#D7E2DC',
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center'
+  },
+
+  selectedButton: {
+    backgroundColor: '#197A55'
+  },
+
+  selectorText: {
+    color: '#333333'
+  },
+
+  selectedText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold'
+  },
+
+  cameraArea: {
     flex: 1,
     borderWidth: 2,
     borderColor: '#197A55',
@@ -59,23 +124,24 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 300
+    minHeight: 320
   },
 
-  scanText: {
+  cameraText: {
+    fontSize: 18,
     color: '#197A55',
     fontWeight: '600'
   },
 
-  button: {
+  scanButton: {
     marginTop: 20,
     backgroundColor: '#197A55',
-    padding: 14,
-    borderRadius: 10,
+    borderRadius: 12,
+    padding: 15,
     alignItems: 'center'
   },
 
-  buttonText: {
+  scanButtonText: {
     color: '#FFFFFF',
     fontWeight: 'bold'
   }
