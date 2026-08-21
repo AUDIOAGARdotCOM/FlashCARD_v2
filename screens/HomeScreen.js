@@ -4,32 +4,31 @@ import {
   Text,
   StyleSheet,
   Pressable,
-  View,
   FlatList
 } from 'react-native';
 
 import SearchBar from '../components/SearchBar';
 import CardItem from '../components/CardItem';
 import EmptyState from '../components/EmptyState';
-import { getCards } from '../services/storage';
+import { loadCards } from '../services/storage';
 
 export default function HomeScreen() {
   const [search, setSearch] = useState('');
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    loadCards();
+    loadData();
   }, []);
 
-  async function loadCards() {
-    const savedCards = await getCards();
+  async function loadData() {
+    const savedCards = await loadCards();
     setCards(savedCards);
   }
 
   const filteredCards = cards.filter(card =>
-    card.name.toLowerCase().includes(
-      search.toLowerCase()
-    )
+    card.name
+      .toLowerCase()
+      .includes(search.toLowerCase())
   );
 
   return (
@@ -43,6 +42,10 @@ export default function HomeScreen() {
         onChangeText={setSearch}
         placeholder="Cerca una carta..."
       />
+
+      <Text style={styles.sectionTitle}>
+        Le tue carte
+      </Text>
 
       {filteredCards.length === 0 ? (
         <EmptyState />
@@ -83,11 +86,19 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
 
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginBottom: 10
+  },
+
   addButton: {
     backgroundColor: '#197A55',
     borderRadius: 12,
     padding: 15,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 10
   },
 
   addButtonText: {
