@@ -4,59 +4,66 @@ import {
   Text,
   StyleSheet,
   View,
-  Pressable
+  Pressable,
+  ScrollView
 } from 'react-native';
 
 export default function CardDetailScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>
-        Dettaglio Carta
-      </Text>
-
-      <View style={styles.card}>
-        <Text style={styles.label}>
-          Nome Carta
+      <ScrollView>
+        <Text style={styles.title}>
+          Dettaglio Carta
         </Text>
 
-        <Text style={styles.value}>
-          Carrefour
-        </Text>
+        <View style={styles.card}>
+          <Text style={styles.cardName}>
+            Carrefour
+          </Text>
 
-        <Text style={styles.label}>
-          Categoria
-        </Text>
+          <Text style={styles.cardCategory}>
+            Supermercato
+          </Text>
+        </View>
 
-        <Text style={styles.value}>
-          Supermercato
-        </Text>
+        <View style={styles.section}>
+          <Text style={styles.label}>
+            Codice Carta
+          </Text>
 
-        <Text style={styles.label}>
-          Codice
-        </Text>
+          <Text style={styles.code}>
+            1234567890123
+          </Text>
+        </View>
 
-        <Text style={styles.code}>
-          1234567890123
-        </Text>
-      </View>
+        <View style={styles.section}>
+          <Text style={styles.label}>
+            Ultimo utilizzo
+          </Text>
 
-      <Pressable style={styles.primaryButton}>
-        <Text style={styles.primaryButtonText}>
-          Mostra in Cassa
-        </Text>
-      </Pressable>
+          <Text style={styles.value}>
+            21/08/2026
+          </Text>
+        </View>
 
-      <Pressable style={styles.secondaryButton}>
-        <Text style={styles.secondaryButtonText}>
-          Modifica Carta
-        </Text>
-      </Pressable>
+        <Pressable style={styles.primaryButton}>
+          <Text style={styles.primaryButtonText}>
+            Mostra in Cassa
+          </Text>
+        </Pressable>
 
-      <Pressable style={styles.deleteButton}>
-        <Text style={styles.deleteButtonText}>
-          Elimina Carta
-        </Text>
-      </Pressable>
+        <Pressable style={styles.secondaryButton}>
+          <Text style={styles.secondaryButtonText}>
+            Modifica Carta
+          </Text>
+        </Pressable>
+
+        <Pressable style={styles.deleteButton}>
+          <Text style={styles.deleteButtonText}>
+            Elimina Carta
+          </Text>
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -81,22 +88,38 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
 
+  cardName: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#17392D'
+  },
+
+  cardCategory: {
+    marginTop: 6,
+    color: '#666666'
+  },
+
+  section: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12
+  },
+
   label: {
     fontSize: 13,
     color: '#666666',
-    marginTop: 10
+    marginBottom: 6
   },
 
   value: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginTop: 4
+    fontSize: 16,
+    fontWeight: '600'
   },
 
   code: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 4,
     letterSpacing: 2
   },
 
@@ -105,6 +128,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     alignItems: 'center',
+    marginTop: 20,
     marginBottom: 10
   },
 
@@ -132,7 +156,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#D32F2F',
     borderRadius: 12,
     padding: 15,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 30
   },
 
   deleteButtonText: {
